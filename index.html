@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>FNE: Fourier Number Embedding</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content=">FNE: Fourier Number Embedding" />
+<meta property="og:title" content="Fourier Number Embedding (FNE)">
+<meta property="og:description" content="Fourier Number Embedding (FNE) directly maps numbers into their Fourier representations, improving efficiency and accuracy for large language models in arithmetic tasks.">
+<meta property="og:url" content="https://kevinzhoutianyi.github.io/FNE_website/">
+<meta property="og:image" content="/figs/add2modelacc_small (1).png"> <!-- Update with an actual image if needed -->
+<meta name="twitter:card" content="summary" /> 
+<link rel="icon" type="image/png" href="figs/allegro.png">
+<link rel="icon" type="image/png" sizes="32x32" href="figs/allegro.png">
+<link rel="icon" type="image/png" sizes="16x16" href="figs/allegro.png">
+<link rel="icon" type="image/x-icon" href="figs/allegro.ico"> <!-- Optional .ico file -->
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fourier Number Embedding (FNE)">
+<meta name="twitter:description" content="Fourier Number Embedding (FNE) improves arithmetic performance in large language models by bypassing tokenization and using Fourier representations.">
+<meta name="twitter:image" content="/figs/add2modelacc_small (1).png"> <!-- Update with an actual image if needed -->
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+<div class="container">
+  
+  <header class="text-center">
+    <h1>FNE: Precise Single-Token Number Embeddings via Fourier Features</h1>
+
+    <p><b>
+      <a href="https://kevinzhoutianyi.github.io/">Tianyi Zhou</a>, 
+      <a href="https://deqingfu.github.io/">Deqing Fu</a>, 
+      <a href="https://scholar.google.com/citations?user=narJyMAAAAAJ&hl=en">Mahdi Soltanolkotabi</a>, 
+      <a href="https://robinjia.github.io/">Robin Jia</a>, 
+      <a href="https://vatsalsharan.github.io/">Vatsal Sharan</a>
+    </b><br>
+      <a href="mailto:tzhou029@usc.edu">tzhou029@usc.edu</a>, 
+      <a href="mailto:deqingfu@usc.edu">deqingfu@usc.edu</a>, 
+      <a href="mailto:soltanol@usc.edu">soltanol@usc.edu</a>, 
+      <a href="mailto:robinjia@usc.edu">robinjia@usc.edu</a>, 
+      <a href="mailto:vsharan@usc.edu">vsharan@usc.edu</a>
+    </p>
+    
+        
+    <div class="icon-container">
+      <a href="https://github.com/KevinZhoutianyi/FNE" target="_blank">
+        <img src="./figs/Github_logo_PNG8.png" alt="GitHub" class="icon github">
+      </a>
+      <a href="https://arxiv.org/abs/your-paper-id" target="_blank">
+        <img src="./figs/ArXiv_logo_2022.svg" alt="Paper" class="icon arxiv">
+      </a>
+    </div>
+  </header>
+  
+
+  <section id="about">
+    <p class="intro-text">
+        Fourier Number Embedding (FNE) <br>
+        directly maps numbers into their Fourier representations, bypassing the tokenization step entirely<br>
+        <strong>with Better Efficiency and Accuracy.</strong>
+    </p>
+    
+    <figure>
+        <img src="./figs/animated_fig.gif" alt="Project animation" class="img-fluid">
+      <figcaption>
+        (a) Extract all numbers from the input. <br>
+        (b) Use FNE to map each number to its embedding; the first two entries represent 18 mod 10, the next two 18 mod 100. <br>
+        (c) Pad FNE with zeros, add it to word embeddings, and feed into the model. <br>
+        (d) For each digit, take two entries from the last hidden state and find the closest number.
+      </figcaption>
+    </figure>
+  </section>
+  <section id="results" class="section">
+    <h2>Empirical Results</h2>
+    <hr>
+    <p>We train Llama-3.2-1B from scratch with different number embedding methods and evaluate its performance on various arithmetic tasks. 
+      Our <strong>Fourier Number Embedding (FNE)</strong> method demonstrates significant improvements in both <strong>data efficiency</strong> and <strong>parameter efficiency</strong>, 
+      achieving <strong>99% accuracy with 64× less data</strong> compared to traditional embeddings. It also outperforms fine-tuned Llama-3.2 models and achieves perfect accuracy.</p>
+      
+    <p class="fig-caption">
+      <strong>Figure:</strong> Comparison of accuracy trends for various arithmetic tasks with respect to model size and data size.
+    </p>
+  
+    <!-- Enlarged Decimal Addition Figures -->
+    <div class="figure-container full-width">
+      <figure>
+        <img src="./figs/adddecimaldataacc (1).png" alt="Decimal Addition Data Accuracy" class="figure-img">
+        <figcaption>6-digit Decimal Addition: Model & Data size vs. Accuracy</figcaption>
+      </figure>
+      <figure>
+        <img src="./figs/adddecimalmodelacc (1).png" alt="Decimal Addition Model Accuracy" class="figure-img">
+        <figcaption>6-digit Decimal Addition: Model & Data size vs. Accuracy</figcaption>
+      </figure>
+    </div>
+  
+    <!-- Integer Addition & Subtraction (Row 1) -->
+    <div class="figure-container">
+      <figure>
+        <img src="./figs/add2dataacc_small (1).png" alt="6-digit Integer Addition Data Accuracy" class="figure-img">
+        <figcaption>6-digit Integer Addition: Model & Data size vs. Accuracy</figcaption>
+      </figure>
+      <figure>
+        <img src="./figs/add2modelacc_small (1).png" alt="6-digit Integer Addition Model Accuracy" class="figure-img">
+        <figcaption>6-digit Integer Addition: Model & Data size vs. Accuracy</figcaption>
+      </figure>
+      <figure>
+        <img src="./figs/sub1dataacc_small (1).png" alt="5-digit Integer Subtraction Data Accuracy" class="figure-img">
+        <figcaption>5-digit Integer Subtraction: Model & Data size vs. Accuracy</figcaption>
+      </figure>
+      <figure>
+        <img src="./figs/sub1modelacc_small (1).png" alt="5-digit Integer Subtraction Model Accuracy" class="figure-img">
+        <figcaption>5-digit Integer Subtraction: Model & Data size vs. Accuracy</figcaption>
+      </figure>
+    </div>
+  
+    <!-- Multiplication 1 & 2 (Row 2) -->
+    <div class="figure-container">
+      <figure>
+        <img src="./figs/mul1dataacc_small (1).png" alt="3-digit Integer Multiplication Data Accuracy" class="figure-img">
+        <figcaption>3-digit Integer Multiplication: Model & Data size vs. Accuracy</figcaption>
+      </figure>
+      <figure>
+        <img src="./figs/mul1modelacc_small (1).png" alt="3-digit Integer Multiplication Model Accuracy" class="figure-img">
+        <figcaption>3-digit Integer Multiplication: Model & Data size vs. Accuracy</figcaption>
+      </figure>
+      <figure>
+        <img src="./figs/mul2dataacc_small (1).png" alt="4-digit Integer Multiplication Data Accuracy" class="figure-img">
+        <figcaption>4-digit Integer Multiplication: Model & Data size vs. Accuracy</figcaption>
+      </figure>
+      <figure>
+        <img src="./figs/mul2modelacc_small (1).png" alt="4-digit Integer Multiplication Model Accuracy" class="figure-img">
+        <figcaption>4-digit Integer Multiplication: Model & Data size vs. Accuracy</figcaption>
+      </figure>
+    </div>
+  
+  
+  </section>
+  
+
+  <section id="design" class="section">
+    <h2>Why Design Like This?</h2>
+    <hr>
+    <p>As discussed in our pervious work [<a href="https://arxiv.org/pdf/2406.03445">Tianyi et al. (NeurIPS 2024)</a>], 
+      LLMs naturally learn Fourier Features during pre-training. With these Fourier features, models are able to perform arithmetic with perfect accuracy. 
+      However, due to the limitation of tokenization, LLMs can only embed numbers up to 520.
+      <br>
+      Below, we provide a simplified illustration of how pre-trained LLMs embed numbers and how this leads to Fourier Number Embedding (FNE).
+    </p>
+    <figure>
+      <img src="./figs/animated_fig2.gif" alt="Project animation" class="img-fluid">
+    <!-- <figcaption>
+      (a) Extract all numbers from the input. <br>
+      (b) Use FNE to map each number to its embedding; the first two entries represent 18 mod 10, the next two 18 mod 100. <br>
+      (c) Pad FNE with zeros, add it to word embeddings, and feed into the model. <br>
+      (d) For each digit, take two entries from the last hidden state and find the closest number. -->
+    <!-- </figcaption> -->
+  </figure>
+    <!-- <p> However, due to the limitation of tokenization, LLMs can only embed numbers up to 520.
+    </p>
+    <ul>
+      <li>Numerical representations can be efficiently encoded without explicit tokenization</li>
+      <li>Pre-trained models leverage these features for improved arithmetic performance</li>
+      <li>Generalization across different numerical values emerges naturally</li>
+    </ul> -->
+  </section>
+
+<!-- 
+
+  <section id="resources" class="section">
+    <h2>Resources</h2>
+    <p>Include links to important resources:</p>
+    <ul>
+      <li><a href="#">Project Documentation</a></li>
+      <li><a href="#">Source Code (GitHub)</a></li>
+      <li><a href="#">Demo or Colab Notebook</a></li>
+    </ul>
+  </section> -->
+
+  <section id="how-to-cite" class="section">
+    <h2>How to Cite</h2>
+    <hr>
+    <p>If you found this project useful, please cite our work as follows:</p>
+    <pre>
+      @article{zhou2024fne,
+        title={FNE: Precise Single-Token Number Embeddings via Fourier Features},
+        author={Tianyi Zhou, Deqing Fu, Mahdi Soltanolkotabi, Robin Jia, Vatsal Sharan},
+        journal={arXiv preprint arXiv:???},
+        year={2025},
+        url={???}
+      }
+    </pre>
+  </section>
+</div>
+
+<footer>
+  <p>&copy; USC</p>
+</footer>
+
+</body>
+</html>
