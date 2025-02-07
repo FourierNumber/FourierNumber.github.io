@@ -176,7 +176,7 @@
     <p>As shown in our previous work [<a href="https://arxiv.org/pdf/2406.03445">Tianyi et al. (NeurIPS 2024)</a>], LLMs learn to use \( x \bmod 2,5,10 \) to precisely represent numbers during pretraining.</p>
     <p>However, given the results \( x \bmod 2,5,10 \), we cannot recover \( x \) when \( x \geq 10 \). For example, \( 1 \) and \( 11 \) will give the same results.</p>
     <p><strong>Hence, we add features such as \( x \bmod 100,1000,\dots \) to ensure the embedding captures the precise representation of numbers.</strong></p>
-    <p>In practice, each column represents a superposition of waves with different periods.</p>
+    <p>In practice, each column is a superposition of waves with different periods.</p>
     <br><br>
     <h3>Example</h3>
     <p>Consider \( x = 41.7 \). Its Fourier Number Embedding is given by</p>
