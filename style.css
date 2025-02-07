@@ -1,6 +1,7 @@
 body { 
     font-family: 'Open Sans', sans-serif; 
     background-color: #f8f9fa; 
+    font-size: 18px;  /* Increase base font size */
   }
   
   .container { 
@@ -18,15 +19,22 @@ body {
     margin-bottom: 10px;
   }
   
-  h1, h2 { 
-    color: #333; 
-  }
+h1 { 
+  font-size: 32px; /* Increase title size */
+  color: #333; 
+}
+
+h2 { 
+  font-size: 26px; /* Increase section heading size */
+  color: #333; 
+}
   
   .intro-text {
     text-align: center; 
     font-size: 18px; 
     font-weight: 500; 
     line-height: 1.6;
+    
   }
   
   figure {
@@ -51,6 +59,7 @@ body {
     color: white; 
     text-align: center; 
     border-radius: 8px; 
+    font-size: 18px; /* Improve figure caption readability */
   }
   .icon-container {
     text-align: center; /* Center icons under the title */
@@ -124,7 +133,7 @@ body {
   
   .fig-caption {
     text-align: center;
-    font-size: 16px;
+    font-size: 18px; /* Improve figure caption readability */
     font-weight: bold;
     margin-top: 15px;
   }

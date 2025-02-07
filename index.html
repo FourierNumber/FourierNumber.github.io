@@ -14,6 +14,9 @@
 <link rel="icon" type="image/png" sizes="16x16" href="figs/allegro.png">
 <link rel="icon" type="image/x-icon" href="figs/allegro.ico"> <!-- Optional .ico file -->
 
+<script type="text/javascript" async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fourier Number Embedding (FNE)">
 <meta name="twitter:description" content="Fourier Number Embedding (FNE) improves arithmetic performance in large language models by bypassing tokenization and using Fourier representations.">
@@ -166,6 +169,74 @@
       <li>Pre-trained models leverage these features for improved arithmetic performance</li>
       <li>Generalization across different numerical values emerges naturally</li>
     </ul> -->
+
+    <p>Each column represents a wave function, using either cosine or sine with different periods.</p>
+    <p>For a given number \( x \), some entries in its embedding encode \( \cos\left(\frac{2\pi}{10} x\right) \), while others encode \( \sin\left(\frac{2\pi}{10} x\right) \).</p>
+    <p>Given \( \cos\left(\frac{2\pi}{10} x\right) \) and \( \sin\left(\frac{2\pi}{10} x\right) \), by using \( \arctan \), we can determine \( x \bmod 10 \), effectively extracting the number's unit digit.</p>
+    <p>As shown in our previous work [<a href="https://arxiv.org/pdf/2406.03445">Tianyi et al. (NeurIPS 2024)</a>], LLMs learn to use \( x \bmod 2,5,10 \) to precisely represent numbers during pretraining.</p>
+    <p>However, given the results \( x \bmod 2,5,10 \), we cannot recover \( x \) when \( x \geq 10 \). For example, \( 1 \) and \( 11 \) will give the same results.</p>
+    <p><strong>Hence, we add features such as \( x \bmod 100,1000,\dots \) to ensure the embedding captures the precise representation of numbers.</strong></p>
+    
+    <br><br>
+    <h3>Example</h3>
+    <p>Consider \( x = 41.7 \). Its Fourier Number Embedding is given by</p>
+    \[
+    [\phi(41.7, 1), \phi(41.7, 10), \phi(41.7, 100), 0, 0, \cdots],
+    \]
+    <p>where \( \phi(x, T) \) is defined as:</p>
+    \[
+    \phi(x, T) = [\cos(2\pi x / T), \sin(2\pi x / T)]
+    \]
+    <p>From these components, by using \( \arctan \), we can recover</p>
+    \[
+    [41.7 \bmod 1, 41.7 \bmod 10, 41.7 \bmod 100] =   [0.7, 1.7, 41.7],
+    \]
+    <br>
+    <!-- <h3>Decoding Process</h3>
+    <p>Given the last hidden state \([h_0,h_1,h_2,h_3 , ..]\), we have:</p>
+    <h4>Loss Computation for the \(i\)-th digit</h4>
+    <p>Compare the similarity between two entries in the hidden state and the Fourier Embedding of the \(i\)-th digit in the label: </p>
+    \[
+    L_{\mathrm{FNE}} (h, y, i) :=    L_{\mathrm{CE}}\!\Bigl(y_i,  (\underbrace{[
+                    h[2i], ~h[2i+1]
+                ]}_{1 \times 2}
+                \cdot
+                \underbrace{\begin{bmatrix}
+                    \phi(0,10)\\
+                    \vdots\\
+                    \phi(9,10)
+                \end{bmatrix}}_{2\times 10})
+           \Bigr)
+    \]
+    
+    <h4>Prediction for the \(i\)-th digit</h4>
+    <p>Find the number whose Fourier embedding is closest to the two given entries in the hidden state.</p>
+    
+    \[
+     \hat{y}_i := 
+        \arg\max_{j \in \{0,\dots,9\}}
+        \Bigl(
+            \big[   h[2i], ~h[2i+1]
+                \big]
+                \cdot
+                \big[\phi(j,10)\big]
+        \Bigr).
+    \]
+     -->
+    
+      <section id="design" class="section">
+        <h2>FAQ</h2>
+        <hr>
+        <p><strong><em>- Why can't we just simply use \( \bmod 100 \)? This contains all the information about 41.7.</em></strong></p>
+        <p><em>If we used only \( T = 100 \), then the value of \( \phi(41.7, 100) \) would be nearly indistinguishable from \( \phi(41.8, 100) \), causing the embedding to lose fine-grained information about less significant digits. However, with these chosen periods \( T \), we can capture all the digits.</em></p>
+        <br>
+        <p><strong><em>- Will FNE affect the semantic meaning of numbers like years?</em></strong></p>
+        <p>As discussed by [<a href="https://proceedings.neurips.cc/paper_files/paper/2022/hash/17359.pdf">Meng et al. (NeurIPS 2022)</a>], the semantic meaning or memory of tokens is often inferred from the MLP layers in transformer models. Since LLMs are typically equipped with sufficient capacity, the precise numerical embedding of numbers takes precedence over encoding their semantic meanings directly within the embeddings. Moreover, as noted by [<a href="https://arxiv.org/pdf/2405.17969">Yao et al. (arXiv 2024)</a>], LLMs are capable of developing specialized circuits to handle different query types. Consequently, FNE is designed to provide accurate numerical representations while allowing the model's architecture to manage semantic contexts independently.</p>  
+        <br>
+        <p><strong><em>- Can we call it Helix Number Embedding or Clock Number Embedding?</em></strong></p>
+        <p>Sure</p>
+        </section>
+    </section>
   </section>
 
 <!-- 
