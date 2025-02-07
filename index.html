@@ -16,6 +16,20 @@
 
 <script type="text/javascript" async src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+  let currentSlide = 1;
+  const totalSlides = 8;  // Update this with the actual number of slides
+
+  function changeSlide(n) {
+      currentSlide += n;
+      if (currentSlide < 1) {
+          currentSlide = totalSlides;
+      } else if (currentSlide > totalSlides) {
+          currentSlide = 1;
+      }
+      document.getElementById("slide-img").src = `./figs/slides/slide${currentSlide}.png`;
+  }
+</script>
 
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fourier Number Embedding (FNE)">
@@ -153,15 +167,20 @@
       <br>
       Below, we provide a simplified illustration of how pre-trained LLMs embed numbers and how this leads to Fourier Number Embedding (FNE).
     </p>
-    <figure>
-      <img src="./figs/animated_fig2.gif" alt="Project animation" class="img-fluid">
+    <!-- <figure>
+      <img src="./figs/animated_fig2.gif" alt="Project animation" class="img-fluid"> -->
     <!-- <figcaption>
       (a) Extract all numbers from the input. <br>
       (b) Use FNE to map each number to its embedding; the first two entries represent 18 mod 10, the next two 18 mod 100. <br>
       (c) Pad FNE with zeros, add it to word embeddings, and feed into the model. <br>
       (d) For each digit, take two entries from the last hidden state and find the closest number. -->
     <!-- </figcaption> -->
-  </figure>
+  <!-- </figure> -->
+  <div class="slideshow-container">
+    <img id="slide-img" src="./figs/slides/slide1.png" alt="Slide 1" class="img-fluid">
+    <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+    <button class="next" onclick="changeSlide(1)">&#10095;</button>
+</div>
     <!-- <p> However, due to the limitation of tokenization, LLMs can only embed numbers up to 520.
     </p>
     <ul>
