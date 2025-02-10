@@ -32,6 +32,6 @@ for i in range(len(images) - 1):
 frames.extend([images[-1]] * final_hold_duration)
 
 # Save as GIF
-frames[0].save("animated_fig.gif", save_all=True, append_images=frames[1:], duration=100, loop=0)
+frames[0].save("animated_fig.gif", save_all=True, append_images=frames[1:], duration=100, loop=1)
 
 print("GIF saved as 'animated_fig.gif'")

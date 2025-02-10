@@ -1,5 +1,5 @@
 body { 
-    font-family: 'Open Sans', sans-serif; 
+  font-family: 'Times New Roman', serif;
     background-color: #f8f9fa; 
     font-size: 18px;  /* Increase base font size */
   }
@@ -8,6 +8,7 @@ body {
     max-width: 1500px;
     width: 96%;
     padding: 30px;
+    padding-bottom: 0px;
     background: white; 
     border-radius: 8px; 
     box-shadow: 0px 0px 10px rgba(0,0,0,0.1); 
@@ -53,8 +54,9 @@ h2 {
   }
   
   footer { 
-    margin-top: 20px; 
-    padding: 10px; 
+
+    margin: 0;
+    padding: 0;
     background: #333; 
     color: white; 
     text-align: center; 
@@ -157,4 +159,156 @@ h2 {
 }
 .next {
     right: 0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border: 1px solid #444;
+  margin: auto;
+}
+th, td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #444;
+}
+th {
+  background-color: #555;
+  color: white;
+}
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+.highlight {
+  font-weight: bold;
+  color: #990000;
+}
+.image-container {
+  text-align: center;
+  margin-top: 20px;
+}
+.caption {
+    text-align: center;
+    font-size: 14px;
+    font-style: italic;
+    margin-top: 5px;
+}
+.table-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.table-caption {
+    caption-side: bottom;  /* Moves caption below the table */
+    text-align: center;     /* Centers the text */
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;       /* Adds spacing between table and caption */
+
+}
+.highlights-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+}
+.highlight-item h3 {
+  text-align: left !important; /* Align text to the left */
+  font-weight: bold; /* Make text bold */
+  font-size: 16px; /* Adjust size if needed */
+  margin-left: 10px; /* Add small margin for better alignment */
+}
+
+.highlight-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  text-align: center;
+  padding: 10px;
+  background: white;
+  border-radius: 8px;
+  /* box-shadow: 0px 0px 8px rgba(0,0,0,0.1); */
+  font-size: 14px;  /* Reduce font size */
+  height: 100%;
+}
+#about {
+  padding-bottom: 30px; /* Adds space after the About section */
+}
+
+.highlight-item table {
+  font-size: 12px; /* Smaller font for tables */
+}
+
+.highlight-item h3 {
+  font-size: 16px; /* Reduce heading size */
+}
+
+.highlight-item img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+th, td {
+  padding: 8px; /* Reduce padding for a more compact look */
+}
+
+
+.outline {
+  position: fixed;
+  left: 20px;
+  top: 80px;
+  width: 280px;
+  background: #ffffff;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+  font-size: 12px;
+  max-height: 80vh;
+  overflow-y: auto;
+  transition: all 0.3s ease-in-out;
+  border-left: 5px solid #007bff;
+}
+
+.outline h3 {
+  margin-top: 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+.outline ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.outline li {
+  margin-bottom: 12px;
+  padding: 5px 0;
+}
+
+.outline a {
+  text-decoration: none;
+  color: #01448b;
+  font-weight: 500;
+  display: block;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.outline a:hover {
+  background: #01448b;
+  color: white;
+}
+
+/* Responsive Design: Hide the outline on smaller screens */
+@media (max-width: 992px) {
+  .outline {
+      display: none;
+  }
 }

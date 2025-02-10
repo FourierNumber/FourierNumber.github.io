@@ -31,6 +31,48 @@
   }
 </script>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      const outlineList = document.getElementById("outline-list");
+  
+      // Manually add "Abstract" to the outline
+      const abstractItem = document.createElement("li");
+      const abstractLink = document.createElement("a");
+      abstractLink.href = "#abstract";
+      abstractLink.textContent = "Abstract";
+  
+      abstractItem.appendChild(abstractLink);
+      outlineList.appendChild(abstractItem);
+  
+      // Dynamically add other sections with <h2> tags
+      const headings = document.querySelectorAll(".container h2");
+  
+      headings.forEach((heading, index) => {
+          const id = heading.id || `section-${index}`;
+          heading.id = id;
+  
+          const listItem = document.createElement("li");
+          const link = document.createElement("a");
+          link.href = `#${id}`;
+          link.textContent = heading.textContent;
+  
+          listItem.appendChild(link);
+          outlineList.appendChild(listItem);
+      });
+  
+      // Smooth scrolling effect
+      document.querySelectorAll('.outline a').forEach(anchor => {
+          anchor.addEventListener('click', function (e) {
+              e.preventDefault();
+              document.querySelector(this.getAttribute('href')).scrollIntoView({
+                  behavior: 'smooth'
+              });
+          });
+      });
+  });
+  </script>
+  
+  
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fourier Number Embedding (FNE)">
 <meta name="twitter:description" content="Fourier Number Embedding (FNE) improves arithmetic performance in large language models by bypassing tokenization and using Fourier representations.">
@@ -43,6 +85,13 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
+
+  <div class="outline">
+    <ul id="outline-list"></ul>
+</div>
+
+
+
 <div class="container">
   
   <header class="text-center">
@@ -74,13 +123,97 @@
   </header>
   
 
-  <section id="about">
+<section id="about">
+  <section id="abstract">
     <p class="intro-text">
         Fourier Number Embedding (FNE) <br>
-        directly maps numbers into their Fourier representations, bypassing the tokenization step entirely<br>
+        directly maps numbers into their Fourier representations, bypassing the tokenization step entirely.<br>
         <strong>with Better Efficiency and Accuracy.</strong>
     </p>
-    
+</section>
+
+
+<div class="highlights-grid">
+  <div class="highlight-item">
+    <h3 >Tokenization Comparison for <span class="highlight">12345.6789</span></h3>
+    <table>
+      <tr>
+          <th>Tokenizer</th>
+          <th>Tokenized Representation</th>
+          <th>Tokens Used</th>
+      </tr>
+      <tr>
+          <td>GPT-4, LLaMA3.2 (BPE)</td>
+          <td><span style="color: #0066cc;">123</span> <span style="color: #009900;">45</span> <span style="color: #cc0000;">.</span> <span style="color: #ff9900;">678</span> <span style="color: #990099;">9</span></td>
+          <td>5</td>
+      </tr>
+      <tr>
+          <td>LLaMA2 (Digitwise tokenization)</td>
+          <td><span style="color: #0066cc;">1</span> <span style="color: #009900;">2</span> <span style="color: #cc0000;">3</span> <span style="color: #ff9900;">4</span> <span style="color: #990099;">5</span> <span style="color: #990000;">.</span> <span style="color: #0066cc;">6</span> <span style="color: #009900;">7</span> <span style="color: #cc0000;">8</span> <span style="color: #ff9900;">9</span></td>
+          <td>10</td>
+      </tr>
+      <tr>
+          <td style="color: red; font-weight: bold;">FNE (Ours)</td>
+          <td><span style="color: #0066cc;">12345.6789</span></td>
+          <td style="color: red; font-weight: bold;">1</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="highlight-item">
+    <h3>Accuracy Comparison</h3>
+    <table>
+        <tr>
+            <th>Model Name</th>
+            <th>Description</th>
+            <th>Accuracy</th>
+        </tr>
+        <tr>
+            <td>GPT-J</td>
+            <td>Pretrained model, evaluated on integer addition for values up to <u>2</u>-digit numbers.</td>
+            <td>80.5%</td>
+        </tr>
+        <tr>
+            <td>Pythia-6.9B</td>
+            <td>Pretrained model, evaluated on integer addition for values up to <u>2</u>-digit numbers.</td>
+            <td>77.2%</td>
+        </tr>
+        <tr>
+            <td>Llama3.1-8B</td>
+            <td>Pretrained model, evaluated on integer addition for values up to <u>2</u>-digit numbers.</td>
+            <td>98.0%</td>
+        </tr>
+        <tr style="color: red; font-weight: bold;">
+            <td>Ours</td>
+            <td>Trained from scratch, evaluated on integer addition up to <u>6</u>-digit numbers.</td>
+            <td>100%</td>
+        </tr>
+        <tr style="color: red; font-weight: bold;">
+            <td>Ours</td>
+            <td>Trained from scratch, evaluated on integer addition  up to <u>50</u>-digit numbers.</td>
+            <td>98.4%</td>
+        </tr>
+    </table>
+</div>
+
+
+  <div class="highlight-item">
+    <h3>Training and Inference Efficiency</h3>
+    <img src="figs/training_time_comparison.png" alt="Training Time Comparison" width="100%">
+  </div>
+
+  <div class="highlight-item">
+    <h3>Data Efficiency</h3>
+    <img src="figs/data_comparison.png" alt="Training Time Comparison" width="100%">
+  </div>
+</div>
+
+
+</section>
+  <section id="about">
+
+    <h2>Methods</h2>
+    <hr>
     <figure>
         <img src="./figs/animated_fig.gif" alt="Project animation" class="img-fluid">
       <figcaption>
@@ -91,72 +224,7 @@
       </figcaption>
     </figure>
   </section>
-  <section id="results" class="section">
-    <h2>Empirical Results</h2>
-    <hr>
-    <p>We train Llama-3.2-1B from scratch with different number embedding methods and evaluate its performance on various arithmetic tasks. 
-      Our <strong>Fourier Number Embedding (FNE)</strong> method demonstrates significant improvements in both <strong>data efficiency</strong> and <strong>parameter efficiency</strong>, 
-      achieving <strong>99% accuracy with 64× less data</strong> compared to traditional embeddings. It also outperforms fine-tuned Llama-3.2 models and achieves perfect accuracy.</p>
-      
-    <p class="fig-caption">
-      <strong>Figure:</strong> Comparison of accuracy trends for various arithmetic tasks with respect to model size and data size.
-    </p>
-  
-    <!-- Enlarged Decimal Addition Figures -->
-    <div class="figure-container full-width">
-      <figure>
-        <img src="./figs/adddecimaldataacc (1).png" alt="Decimal Addition Data Accuracy" class="figure-img">
-        <figcaption>6-digit Decimal Addition: Model & Data size vs. Accuracy</figcaption>
-      </figure>
-      <figure>
-        <img src="./figs/adddecimalmodelacc (1).png" alt="Decimal Addition Model Accuracy" class="figure-img">
-        <figcaption>6-digit Decimal Addition: Model & Data size vs. Accuracy</figcaption>
-      </figure>
-    </div>
-  
-    <!-- Integer Addition & Subtraction (Row 1) -->
-    <div class="figure-container">
-      <figure>
-        <img src="./figs/add2dataacc_small (1).png" alt="6-digit Integer Addition Data Accuracy" class="figure-img">
-        <figcaption>6-digit Integer Addition: Model & Data size vs. Accuracy</figcaption>
-      </figure>
-      <figure>
-        <img src="./figs/add2modelacc_small (1).png" alt="6-digit Integer Addition Model Accuracy" class="figure-img">
-        <figcaption>6-digit Integer Addition: Model & Data size vs. Accuracy</figcaption>
-      </figure>
-      <figure>
-        <img src="./figs/sub1dataacc_small (1).png" alt="5-digit Integer Subtraction Data Accuracy" class="figure-img">
-        <figcaption>5-digit Integer Subtraction: Model & Data size vs. Accuracy</figcaption>
-      </figure>
-      <figure>
-        <img src="./figs/sub1modelacc_small (1).png" alt="5-digit Integer Subtraction Model Accuracy" class="figure-img">
-        <figcaption>5-digit Integer Subtraction: Model & Data size vs. Accuracy</figcaption>
-      </figure>
-    </div>
-  
-    <!-- Multiplication 1 & 2 (Row 2) -->
-    <div class="figure-container">
-      <figure>
-        <img src="./figs/mul1dataacc_small (1).png" alt="3-digit Integer Multiplication Data Accuracy" class="figure-img">
-        <figcaption>3-digit Integer Multiplication: Model & Data size vs. Accuracy</figcaption>
-      </figure>
-      <figure>
-        <img src="./figs/mul1modelacc_small (1).png" alt="3-digit Integer Multiplication Model Accuracy" class="figure-img">
-        <figcaption>3-digit Integer Multiplication: Model & Data size vs. Accuracy</figcaption>
-      </figure>
-      <figure>
-        <img src="./figs/mul2dataacc_small (1).png" alt="4-digit Integer Multiplication Data Accuracy" class="figure-img">
-        <figcaption>4-digit Integer Multiplication: Model & Data size vs. Accuracy</figcaption>
-      </figure>
-      <figure>
-        <img src="./figs/mul2modelacc_small (1).png" alt="4-digit Integer Multiplication Model Accuracy" class="figure-img">
-        <figcaption>4-digit Integer Multiplication: Model & Data size vs. Accuracy</figcaption>
-      </figure>
-    </div>
-  
-  
-  </section>
-  
+
 
   <section id="design" class="section">
     <h2>Why Design Like This?</h2>
@@ -259,6 +327,75 @@
     </section>
   </section>
 
+
+  <section id="results" class="section">
+    <h2>Empirical Results</h2>
+    <hr>
+    <p>We train Llama-3.2-1B from scratch with different number embedding methods and evaluate its performance on various arithmetic tasks. 
+      Our <strong>Fourier Number Embedding (FNE)</strong> method demonstrates significant improvements in both <strong>data efficiency</strong> and <strong>parameter efficiency</strong>, 
+      achieving <strong>99% accuracy with 64× less data</strong> compared to traditional embeddings. It also outperforms fine-tuned Llama-3.2 models and achieves perfect accuracy.</p>
+      
+    <p class="fig-caption">
+      <strong>Figure:</strong> Comparison of accuracy trends for various arithmetic tasks with respect to model size and data size.
+    </p>
+  
+    <!-- Enlarged Decimal Addition Figures -->
+    <div class="figure-container full-width">
+      <figure>
+        <img src="./figs/adddecimaldataacc (1).png" alt="Decimal Addition Data Accuracy" class="figure-img">
+        <figcaption>6-digit Decimal Addition: Model & Data size vs. Accuracy</figcaption>
+      </figure>
+      <figure>
+        <img src="./figs/adddecimalmodelacc (1).png" alt="Decimal Addition Model Accuracy" class="figure-img">
+        <figcaption>6-digit Decimal Addition: Model & Data size vs. Accuracy</figcaption>
+      </figure>
+    </div>
+  
+    <!-- Integer Addition & Subtraction (Row 1) -->
+    <div class="figure-container">
+      <figure>
+        <img src="./figs/add2dataacc_small (1).png" alt="6-digit Integer Addition Data Accuracy" class="figure-img">
+        <figcaption>6-digit Integer Addition: Model & Data size vs. Accuracy</figcaption>
+      </figure>
+      <figure>
+        <img src="./figs/add2modelacc_small (1).png" alt="6-digit Integer Addition Model Accuracy" class="figure-img">
+        <figcaption>6-digit Integer Addition: Model & Data size vs. Accuracy</figcaption>
+      </figure>
+      <figure>
+        <img src="./figs/sub1dataacc_small (1).png" alt="5-digit Integer Subtraction Data Accuracy" class="figure-img">
+        <figcaption>5-digit Integer Subtraction: Model & Data size vs. Accuracy</figcaption>
+      </figure>
+      <figure>
+        <img src="./figs/sub1modelacc_small (1).png" alt="5-digit Integer Subtraction Model Accuracy" class="figure-img">
+        <figcaption>5-digit Integer Subtraction: Model & Data size vs. Accuracy</figcaption>
+      </figure>
+    </div>
+  
+    <!-- Multiplication 1 & 2 (Row 2) -->
+    <div class="figure-container">
+      <figure>
+        <img src="./figs/mul1dataacc_small (1).png" alt="3-digit Integer Multiplication Data Accuracy" class="figure-img">
+        <figcaption>3-digit Integer Multiplication: Model & Data size vs. Accuracy</figcaption>
+      </figure>
+      <figure>
+        <img src="./figs/mul1modelacc_small (1).png" alt="3-digit Integer Multiplication Model Accuracy" class="figure-img">
+        <figcaption>3-digit Integer Multiplication: Model & Data size vs. Accuracy</figcaption>
+      </figure>
+      <figure>
+        <img src="./figs/mul2dataacc_small (1).png" alt="4-digit Integer Multiplication Data Accuracy" class="figure-img">
+        <figcaption>4-digit Integer Multiplication: Model & Data size vs. Accuracy</figcaption>
+      </figure>
+      <figure>
+        <img src="./figs/mul2modelacc_small (1).png" alt="4-digit Integer Multiplication Model Accuracy" class="figure-img">
+        <figcaption>4-digit Integer Multiplication: Model & Data size vs. Accuracy</figcaption>
+      </figure>
+    </div>
+  
+  
+  </section>
+  
+
+
 <!-- 
 
   <section id="resources" class="section">
@@ -285,8 +422,13 @@
       }
     </pre>
   </section>
-</div>
-
+  <section id="contact" class="section">
+    <h2>Contact Me</h2>
+    <hr>
+    <p>If you would like to discuss applying <strong>Fourier Number Embedding (FNE)</strong> to quantization, data analysis, time series, or others—or explore adding new features to FNE, feel free to connect!</p>
+    <p><strong>Email:</strong> <a href="mailto:tzhou029@usc.edu">tzhou029@usc.edu</a></p>
+  </section>
+  
 <footer>
   <p>&copy; USC</p>
 </footer>
