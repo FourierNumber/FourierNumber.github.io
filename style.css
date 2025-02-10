@@ -2,6 +2,7 @@ body {
   font-family: 'Times New Roman', serif;
     background-color: #f8f9fa; 
     font-size: 18px;  /* Increase base font size */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
   }
   
   .container { 
@@ -238,11 +239,11 @@ tr:nth-child(even) {
 }
 
 .highlight-item table {
-  font-size: 12px; /* Smaller font for tables */
+  font-size: 15px; /* Smaller font for tables */
 }
 
 .highlight-item h3 {
-  font-size: 16px; /* Reduce heading size */
+  font-size: 18px; /* Reduce heading size */
 }
 
 .highlight-item img {
