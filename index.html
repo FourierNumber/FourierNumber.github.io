@@ -248,7 +248,7 @@
   <section id="design" class="section">
     <h2>Why Design Like This?</h2>
     <hr>
-    <p>As discussed in our pervious work [<a href="https://arxiv.org/pdf/2406.03445">Tianyi et al. (NeurIPS 2024)</a>], 
+    <p>As discussed in our pervious work [<a href="https://arxiv.org/pdf/2406.03445">Zhou et al. (NeurIPS 2024)</a>], 
       LLMs naturally learn Fourier Features during pre-training. With these Fourier features, models are able to perform arithmetic with perfect accuracy. 
       However, due to the limitation of tokenization, LLMs can only embed numbers up to three digits.
       <br>
@@ -279,7 +279,7 @@
     <p>Each column represents a wave function, using either cosine or sine with different periods.</p>
     <p>For a given number \( x \), some entries in its embedding encode \( \cos\left(\frac{2\pi}{10} x\right) \), while others encode \( \sin\left(\frac{2\pi}{10} x\right) \).</p>
     <p>Given \( \cos\left(\frac{2\pi}{10} x\right) \) and \( \sin\left(\frac{2\pi}{10} x\right) \), by using \( \arctan \), we can determine \( x \bmod 10 \), effectively extracting the number's unit digit.</p>
-    <p>As shown in our previous work [<a href="https://arxiv.org/pdf/2406.03445">Tianyi et al. (NeurIPS 2024)</a>], LLMs learn to use \( x \bmod 2,5,10 \) to precisely represent numbers during pretraining.</p>
+    <p>As shown in our previous work [<a href="https://arxiv.org/pdf/2406.03445">Zhou et al. (NeurIPS 2024)</a>], LLMs learn to use \( x \bmod 2,5,10 \) to precisely represent numbers during pretraining.</p>
     <p>However, given the results \( x \bmod 2,5,10 \), we cannot recover \( x \) when \( x \geq 10 \). For example, \( 1 \) and \( 11 \) will give the same results.</p>
     <p><strong>Hence, we add features such as \( x \bmod 100,1000,\dots \) to ensure the embedding captures the precise representation of numbers.</strong></p>
     <p>In practice, each column is a superposition of waves with different periods.</p>
