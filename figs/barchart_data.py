@@ -61,9 +61,9 @@ for i, color in enumerate(academic_colors):
     autolabel_nan_bars(bars[i], training_data_nan_masked[:, i])
 
 # Labels and formatting
-ax.set_xlabel("Operation", fontsize=14)
+# ax.set_xlabel("Operation", fontsize=15)
 ax.set_ylabel("Training Data Needed (>99% Acc.)", fontsize=16)  # Compact and larger font
-ax.set_title("Training Data Required for Arithmetic Tasks", fontsize=16)
+ax.set_title("Training Data Required to Achieve >99% Accuracy", fontsize=16)
 ax.set_xticks(x)
 ax.set_xticklabels(operations, fontsize=14)
 ax.legend(fontsize=12)
