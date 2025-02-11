@@ -135,30 +135,49 @@
 
 <div class="highlights-grid">
   <div class="highlight-item">
-    <h3 >Tokenization Comparison for <span class="highlight">12345.6789</span></h3>
+    <h3>Tokenization Comparison for <span class="highlight">12345.6789</span></h3>
     <table>
-      <tr>
-          <th>Tokenizer</th>
-          <th>Tokenized Representation</th>
-          <th>Tokens Used</th>
-      </tr>
-      <tr>
-          <td>GPT-4, LLaMA3.2 (BPE)</td>
-          <td><span style="color: #0066cc;">123</span> <span style="color: #009900;">45</span> <span style="color: #cc0000;">.</span> <span style="color: #ff9900;">678</span> <span style="color: #990099;">9</span></td>
-          <td>5</td>
-      </tr>
-      <tr>
-          <td>LLaMA2 (Digitwise tokenization)</td>
-          <td><span style="color: #0066cc;">1</span> <span style="color: #009900;">2</span> <span style="color: #cc0000;">3</span> <span style="color: #ff9900;">4</span> <span style="color: #990099;">5</span> <span style="color: #990000;">.</span> <span style="color: #0066cc;">6</span> <span style="color: #009900;">7</span> <span style="color: #cc0000;">8</span> <span style="color: #ff9900;">9</span></td>
-          <td>10</td>
-      </tr>
-      <tr>
-          <td style="color: red; font-weight: bold;">FNE (Ours)</td>
-          <td><span style="color: #0066cc;">12345.6789</span></td>
-          <td style="color: red; font-weight: bold;">1</td>
-      </tr>
+        <tr>
+            <th>Tokenizer</th>
+            <th>Tokenized Representation</th>
+            <th>Tokens Used</th>
+        </tr>
+        <tr>
+            <td>GPT-4, LLaMA3.2 (BPE)</td>
+            <td>
+                <span class="token-box" style="color: #0066cc;">123</span>
+                <span class="token-box" style="color: #009900;">45</span>
+                <span class="token-box" style="color: #cc0000;">.</span>
+                <span class="token-box" style="color: #ff9900;">678</span>
+                <span class="token-box" style="color: #990099;">9</span>
+            </td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>LLaMA2 (Digitwise tokenization)</td>
+            <td>
+                <span class="token-box" style="color: #0066cc;">1</span>
+                <span class="token-box" style="color: #009900;">2</span>
+                <span class="token-box" style="color: #cc0000;">3</span>
+                <span class="token-box" style="color: #ff9900;">4</span>
+                <span class="token-box" style="color: #990099;">5</span>
+                <span class="token-box" style="color: #990000;">.</span>
+                <span class="token-box" style="color: #0066cc;">6</span>
+                <span class="token-box" style="color: #009900;">7</span>
+                <span class="token-box" style="color: #cc0000;">8</span>
+                <span class="token-box" style="color: #ff9900;">9</span>
+            </td>
+            <td>10</td>
+        </tr>
+        <tr>
+            <td style="color: red; font-weight: bold;">FNE (Ours)</td>
+            <td>
+                <span class="token-box single-token" style="color: #0066cc;">12345.6789</span>
+            </td>
+            <td style="color: red; font-weight: bold;">1</td>
+        </tr>
     </table>
-  </div>
+</div>
 
   <div class="highlight-item">
     <h3>Accuracy Comparison</h3>
