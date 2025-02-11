@@ -39,8 +39,8 @@ plt.bar(x + width, [train_times[2], train_times_sub[2], train_times_mul[2]], wid
 
 # Formatting
 plt.xticks(x, datasets, fontsize=12, fontweight='bold')
-plt.ylabel("Training Time (seconds)", fontsize=14, fontweight="bold")
-plt.title("Training Time Comparison (One Epoch)", fontsize=16, fontweight="bold")
+plt.ylabel("Training and Inference Time (Seconds)", fontsize=14, fontweight="bold")
+plt.title("Comparison of Training and Inference Time per Epoch", fontsize=16, fontweight="bold")
 plt.legend(fontsize=12, frameon=True, edgecolor='black')
 plt.yticks(fontsize=12)
 plt.grid(axis='y', linestyle='dashed', alpha=0.5)  # Light grid for readability
