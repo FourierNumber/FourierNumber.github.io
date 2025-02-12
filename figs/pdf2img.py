@@ -2,7 +2,7 @@ from pdf2image import convert_from_path
 import os
 
 # Input PDF file path
-pdf_path = "/home/tianyizhou/FourierNumber.github.io/figs/insight.pdf"
+pdf_path = "/home/tianyizhou/FourierNumber.github.io/figs/teaser.pdf"
 output_folder = "/home/tianyizhou/FourierNumber.github.io/figs/slides"
 
 # Ensure output folder exists
