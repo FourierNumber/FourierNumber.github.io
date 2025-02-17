@@ -125,7 +125,7 @@
       <a href="https://github.com/KevinZhoutianyi/FoNE" target="_blank">
         <img src="./figs/Github_logo_PNG8.png" alt="GitHub" class="icon github">
       </a>
-      <a href="https://arxiv.org/abs/your-paper-id" target="_blank">
+      <a href="https://arxiv.org/abs/2502.09741" target="_blank">
         <img src="./figs/ArXiv_logo_2022.svg" alt="Paper" class="icon arxiv">
       </a>
     </div>
@@ -188,40 +188,47 @@
     </table>
 </div>
 
-  <div class="highlight-item">
-    <h3>Accuracy Comparison</h3>
-    <table>
-        <tr>
-            <th>Model Name</th>
-            <th>Description</th>
-            <th>Accuracy</th>
-        </tr>
-        <tr>
-            <td>GPT-J</td>
-            <td>Pretrained model, evaluated on integer addition for values up to <u>2</u>-digit numbers.</td>
-            <td>80.5%</td>
-        </tr>
-        <tr>
-            <td>Pythia-6.9B</td>
-            <td>Pretrained model, evaluated on integer addition for values up to <u>2</u>-digit numbers.</td>
-            <td>77.2%</td>
-        </tr>
-        <tr>
-            <td>Llama3.1-8B</td>
-            <td>Pretrained model, evaluated on integer addition for values up to <u>2</u>-digit numbers.</td>
-            <td>98.0%</td>
-        </tr>
-        <tr style="color: red; font-weight: bold;">
-            <td>Ours</td>
-            <td>Trained from scratch, evaluated on integer addition up to <u>6</u>-digit numbers.</td>
-            <td>100%</td>
-        </tr>
-        <tr style="color: red; font-weight: bold;">
-            <td>Ours</td>
-            <td>Trained from scratch, evaluated on integer addition  up to <u>50</u>-digit numbers.</td>
-            <td>98.4%</td>
-        </tr>
-    </table>
+<div class="highlight-item">
+  <h3>Accuracy Comparison</h3>
+  <table>
+    <tr>
+      <th>Model Name</th>
+      <th>Description</th>
+      <th>Accuracy</th>
+    </tr>
+    <tr>
+      <td>GPT-J</td>
+      <td>Pretrained model, evaluated on integer addition (up to <u>2</u>-digit numbers).</td>
+      <td>80.5%</td>
+    </tr>
+    <tr>
+      <td>Llama3.1-8B</td>
+      <td>Pretrained model, evaluated on integer addition (up to <u>2</u>-digit numbers).</td>
+      <td>98.0%</td>
+    </tr>
+    <tr>
+      <td>DeepSeek R1</td>
+      <td>Pretrained model, evaluated on integer addition (up to <u>50</u>-digit numbers).</td>
+      <td>39.56%</td>
+    </tr>
+    <tr>
+      <td>Llama3.1-405B</td>
+      <td>Pretrained model, evaluated on integer addition (up to <u>50</u>-digit numbers).</td>
+      <td>32.81%</td>
+    </tr>
+    <tr style="color: red; font-weight: bold;">
+      <td>Ours</td>
+      <td>Trained from scratch, evaluated on integer addition (up to <u>6</u>-digit).</td>
+      <td>100%</td>
+    </tr>
+    <tr style="color: red; font-weight: bold;">
+      <td>Ours</td>
+      <td>Trained from scratch, evaluated on integer addition (up to <u>50</u>-digit).</td>
+      <td>98.4%</td>
+    </tr>
+  </table>
+
+  
 </div>
 
 
@@ -444,9 +451,9 @@
       @article{zhou2024fone,
         title={FoNE: Precise Single-Token Number Embeddings via Fourier Features},
         author={Tianyi Zhou, Deqing Fu, Mahdi Soltanolkotabi, Robin Jia, Vatsal Sharan},
-        journal={arXiv preprint arXiv:???},
+        journal={arXiv preprint arXiv:2502.09741},
         year={2025},
-        url={???}
+        url={https://arxiv.org/abs/2502.09741}
       }
     </pre>
   </section>
